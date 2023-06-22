@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Devenir recruteur</title>
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/stylesheets/candidate/candidate.css">
+  <link rel="stylesheet" href="/stylesheets/candidate/become-recruiter.css">
+</head>
+
+<body>
+
+  <!-- header -->
+  <header>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+      <div class="container-fluid">
+
+        <!-- logo -->
+        <a class="navbar-brand" href="/candidate">
+          <img src="/images/logo.png" alt="logo">
+        </a>
+
+        <!-- toggler -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- menu -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="link" href="/candidate/job-offers">Offres d'emploi</a>
+            </li>
+            <li class="nav-item">
+              <a class="link" href="/candidate/my-applications">Mes candidatures</a>
+            </li>
+            <% if(user.type==='recruiter' ) { %>
+              <li class="nav-item">
+                <a class="link" href="/recruiter/dashboard">Recruter</a>
+              </li>
+            <% } else if(user.type==='admin' ) { %>
+              <li class="nav-item">
+                <a class="link" href="/admin/dashboard">Administrer</a>
+              </li>
+            <% } else { %>
+              <li class="nav-item">
+                <a class="link active" href="/candidate/become-recruiter">Devenir recruteur</a>
+              </li>
+              <li class="nav-item">
+                <a class="link" href="/candidate/my-recruiter-requests">Mes demandes recruteur</a>
+              </li>
+            <% } %>
+          </ul>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+              <a class="nav-link link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <%= user.first_name %> <%= user.last_name %>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <li>
+                  <a class="dropdown-item link" href="/logout">
+                    <i class="fa-solid fa-right-from-bracket"></i> Déconnexion</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+    </div>
+    </nav>
+  </header>
+
+  <main id="content">
+
+    <!-- banner -->
+    <div class="banner d-flex flex-column align-items-center justify-content-center">
+      <div>
+        <h1 class="organisation text-uppercase text-center fs-3">
+          Devenir recruteur
+        </h1>
+      </div>
+    </div>
+
+    <div class="buttonWrapper d-flex justify-content-center align-items-center">
+      <button class="tab-button active" data-id="job">Rejoindre une organisation</button>
+      <button class="tab-button" data-id="application">Créer une organisation</button>
+    </div>
+
+    <div class="container-fluid">
+
+      <!-- wrapper for offer content -->
+      <div class="wrapper">
+
+        <!-- join an organization -->
+        <div id="join-content" class="wrapper-content d-flex justify-content-center">
+          
+          <form method="POST" action="/candidate/become-recruiter/join-organization" novalidate>
+
+            <!-- organization siren -->
+            <div class="form-group mt-4">
+              <label for="organizationSiren" class="control-label">SIREN</label>
+              <input id="organizationSiren" name="siren" class="form-control" placeholder="SIREN de l'organisation" required>
+              <div class="invalid-feedback">Entrez un SIREN valide.</div>
+            </div>
+
+            <!-- submit -->
+            <div class="form-group d-flex flex-row align-items-center mt-4">
+              <input type="submit" name="submit" value="Envoyer" id="form-submit">
+              <span class="error submit-error d-none">Une erreur est survenue.</span>
+            </div>
+
+          </form>
+        </div>
+
+        <!-- create an organization -->
+        <div id="create-content" class="wrapper-content d-none d-flex justify-content-center">
+
+          <form method="POST" action="/candidate/become-recruiter/create-organization" novalidate>
+
+            <!-- siren -->
+            <div class="form-group">
+              <label for="siren" class="control-label">SIREN</label>
+              <input id="siren" name="siren" class="form-control" placeholder="SIREN de l'organisation" required>
+              <div class="invalid-feedback">Entrez un SIREN valide.</div>
+            </div>
+
+            <!-- name -->
+            <div class="form-group mt-3">
+              <label for="name" class="control-label">Organisation</label>
+              <input id="name" name="name" class="form-control" placeholder="Nom de l'organisation" required>
+              <div class="invalid-feedback">Entrez un nom d'organisation valide.</div>
+            </div>
+
+            <!-- headquarter -->
+            <div class="form-group mt-3">
+              <label for="headquarter" class="control-label">Siège social</label>
+              <input type="text" name="headquarter" class="form-control" id="headquarter" placeholder="Adresse du siège de l'organisation" required>
+              <div class="invalid-feedback">Entrez le siège social de l'organisation.</div>
+            </div>
+
+            <!-- type -->
+            <div class="form-group mt-3">
+                <label for="type" class="control-label d-block">Type d'organisation</label>
+                <select name="type" id="type" required>
+                    <option value="association">Association</option>
+                    <option value="sarl">SARL</option>
+                    <option value="eurl">EURL</option>
+                    <option value="sasu">SASU</option>
+                </select>
+            </div>
+
+            <!-- submit -->
+            <div class="form-group d-flex flex-row align-items-center mt-4">
+              <input type="submit" name="submit" value="Envoyer" id="form-submit">
+              <span class="error submit-error d-none">Une erreur est survenue.</span>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- JavaScript Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"></script>
+  <script src="/javascript/candidate/become-recruiter.js"></script>
+  <script src="/javascript/form-sender.js"></script>
+
+</body>
+
+</html>

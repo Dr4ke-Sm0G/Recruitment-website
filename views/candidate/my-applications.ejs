@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes candidatures</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        rel="stylesheet">
+    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'> 
+    <link rel="stylesheet" href="/stylesheets/candidate/candidate.css">
+    <link rel="stylesheet" href="/stylesheets/table.css">
+    <link rel="stylesheet" href="/stylesheets/candidate/my-applications.css">
+
+</head>
+
+<body>
+    <!-- header -->
+    <header>
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+            <div class="container-fluid">
+
+                <!-- logo -->
+                <a class="navbar-brand" href="/candidate">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+
+                <!-- toggler -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- menu -->
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                      <li class="nav-item">
+                        <a class="link" href="/candidate/job-offers">Offres d'emploi</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="link active" href="/candidate/my-applications">Mes candidatures</a>
+                      </li>
+                      <% if(user.type==='recruiter' ) { %>
+                        <li class="nav-item">
+                          <a class="link" href="/recruiter/dashboard">Recruter</a>
+                        </li>
+                      <% } else if(user.type==='admin' ) { %>
+                        <li class="nav-item">
+                          <a class="link" href="/admin/dashboard">Administrer</a>
+                        </li>
+                      <% } else { %>
+                        <li class="nav-item">
+                          <a class="link" href="/candidate/become-recruiter">Devenir recruteur</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="link" href="/candidate/my-recruiter-requests">Mes demandes recruteur</a>
+                        </li>
+                      <% } %>
+                    </ul>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown">
+                          <a class="nav-link link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <%= user.first_name %> <%= user.last_name %>
+                          </a>
+                          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li>
+                              <a class="dropdown-item link" href="/logout">
+                                <i class="fa-solid fa-right-from-bracket"></i> Déconnexion</a>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                </div>
+            </div>
+        </nav>
+
+    </header>
+
+    <main id="content">
+
+        <!-- banner -->
+        <div class="banner d-flex flex-column align-items-center justify-content-center">
+            <h1 class="organisation text-uppercase text-center fs-3">
+                Mes candidatures
+            </h1>
+        </div>
+
+        <div class="wrapper">
+
+            <!-- applications table -->
+            <div id="applications-table" class="table-overview">
+
+                <div class="overview-table">
+                    <!-- table -->
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <td>Offre d'emploi</td>
+                                <td>Date de candidature</td>
+                                <td class="text-center">Statut</td>
+                                <td class="text-center">Voir</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% applications.forEach((application) => { %>
+                                <tr scope="row" class="application" data-offer-id="<%= application.job_offer %>">
+                                    <td>
+                                        <span class="fw-bold"><%= application.job_title %></span>
+                                    </td>
+                                    <td>
+                                        <span><%= moment(application.date).format('DD/MM/YYYY') %></span>
+                                    </td>
+                                    <td class="cell-status text-center">
+                                        <span class="status" data-status="<%= application.status %>">
+                                        <%= util.getStatusName(application.status) %>
+                                        </span>
+                                    </td>
+                                    <td class="cell-edit text-center">
+                                        <a href="/candidate/my-applications/<%= application.job_offer %>" class="text-decoration-none">
+                                            <i class="fa-solid fa-eye action action-show"></i>
+                                        </a>
+                                        <% if(application.status === 'pending') { %>
+                                            <i class="fa-solid fa-trash action action-delete"></i>
+                                        <% } %>
+                                    </td>
+                                </tr>
+                            <% }) %>
+
+                            <!-- case in which no data is found -->
+                            <% if(applications.length===0) { %>
+                                <tr>
+                                    <td colspan="10" class="text-center">Aucune candidature trouvée.</td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- pagination -->
+                <% if(pagination !== null) { %>
+                    <div class="pagination-container d-flex align-items-center justify-content-center">
+                        <nav aria-label="pagination">
+        
+                            <ul class="pagination">
+                                <!-- previous -->
+                                <li class="page-item <%= pagination.previous === undefined ? 'disabled' : '' %>">
+                                    <a class="page-link previous" href="<%= pagination.previousURL %>">
+                                        <i class="fa-solid fa-angle-left"></i>
+                                    </a>
+                                </li>
+        
+                                <!-- page numbers -->
+                                <% pagination.pagesURL.forEach((page) => { %>
+                                <li class="page-item">
+                                    <a class="page-link <%= page.number == pagination.current ? 'page-current' : '' %>" href="<%= page.url %>">
+                                        <%= page.number %>
+                                    </a>
+                                </li>
+                                <% }) %>
+        
+                                <!-- next -->
+                                <li class="page-item <%= pagination.next === undefined ? 'disabled' : '' %>">
+                                    <a class="page-link next" href="<%= pagination.nextURL %>">
+                                        <i class="fa-solid fa-angle-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                <% } %>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- toasts -->
+    <div id="toast-container" class="toast-container position-fixed"></div>
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"></script>
+    <script src="/javascript/toast.js"></script>
+    <script src="/javascript/candidate/my-applications.js"></script>
+
+</body>
+
+</html>

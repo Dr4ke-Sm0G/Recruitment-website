@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        rel="stylesheet">
+    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link rel="stylesheet" href="/stylesheets/dashboard.css">
+    <link rel="stylesheet" href="/stylesheets/profile.css">
+    <title>Gérer un compte</title>
+    <link rel="icon" href="/images/logo_left.png">
+</head>
+
+<body>
+
+    <!-- sidebar -->
+    <div id="l-sidebar" class="sidebar-active no-transition">
+
+        <!-- header -->
+        <div id="sidebar-header" class="d-flex align-items-center">
+            <a href="/"><img class="navbar-brand" src="/images/logo.png" alt="logo"></a>
+        </div>
+
+        <!-- navigation links -->
+        <ul class="list-unstyled d-flex flex-column justify-content-between">
+
+            <!-- top -->
+            <div class="top">
+                <li class="nav-link">
+                    <a href="/admin/dashboard" class="text-decoration-none d-block">
+                        <i class="fa-solid fa-gauge text-center"></i>
+                        <span>Tableau de bord</span>
+                    </a>
+                </li>
+                <li class="nav-link link-active">
+                    <a href="/admin/users" class="text-decoration-none d-block">
+                        <i class="fa-solid fa-users text-center"></i>
+                        <span>Comptes</span>
+                    </a>
+                </li>
+                <li class="nav-link">
+                    <a href="/admin/organizations" class="text-decoration-none d-block">
+                        <i class="fa-regular fa-building text-center"></i>
+                        <span>Organisations</span>
+                    </a>
+                </li>
+                <li class="nav-link">
+                    <a href="/admin/recruiter-requests" class="text-decoration-none d-block">
+                        <i class="fa-solid fa-user-plus text-center"></i>
+                        <span>Demandes recruteur</span>
+                    </a>
+                </li>
+            </div>
+
+            <!-- bottom -->
+            <div class="bottom">
+                <li class="nav-link">
+                    <a href="/logout" class="text-decoration-none d-block">
+                        <i class="fa-solid fa-right-from-bracket text-center"></i>
+                        <span>Déconnexion</span>
+                    </a>
+                </li>
+            </div>
+        </ul>
+    </div>
+
+    <!-- top navbar -->
+    <nav id="top-navbar" class="body-padding no-transition">
+        <div id="top-navbar-content" class="d-flex flex-row align-items-center justify-content-between">
+            <i id="toggler" class="fa-solid fa-bars fa-xl clickable"></i>
+            <div class="account d-flex flex-row align-items-center">
+                <span><%= user.first_name %> <%= user.last_name %></span>
+                <i class="fa-solid fa-user fa-xl clickable"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- content -->
+    <div id="wrapper" class="body-padding no-transition">
+        <div id="content" class="d-flex flex-column align-items-center">
+            <h1>Compte utilisateur</h1>
+
+            <!-- profil -->
+            <div class="profile d-flex flex-row flex-grow flex-wrap justify-content-center">
+
+                <!-- header -->
+                <div class="profile-header d-flex flex-row align-items-center justify-content-between">
+                    <h2>
+                        <%= userAccount.first_name %>
+                        <%= userAccount.last_name %>
+                    </h2>
+                    <span class="status" data-status="<%= userAccount.account_status %>">
+                        <%= util.getStatusName(userAccount.account_status) %>
+                    </span>
+                </div>
+
+                <!-- actions -->
+                <div class="profile-actions">
+                    <img src="/images/user-icon.png" alt="user icon" class="img-fluid profile-img">
+
+                    <div class="actions d-flex">
+                        <div>
+                            <!-- role -->
+                            <div class="d-flex flex-column align-items-center justify-content-center role">
+                                <h3>Role</h3>
+                                <div id="role-dropdown" class="dropdown d-flex align-items-center justify-content-center">
+                                    <% if(userAccount.email !== user.email) { %>
+                                        <button class="action btn btn-secondary dropdown-toggle" type="button"
+                                            id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                            <%= util.getRoleName(userAccount.type) %>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <% if(userAccount.type !== 'candidate') { %>
+                                                <li class="change-role dropdown-item" data-type="candidate">Passer <%= util.getRoleName('candidate') %> </li>
+                                            <% } %>
+
+                                            <% if(userAccount.type !== 'admin') { %>
+                                                <li class="change-role dropdown-item" data-type="admin">Passer <%= util.getRoleName('admin') %></li>
+                                            <% } %>
+                                        </ul>
+                                    <% } else { %>
+                                        <span class="action" type="button">
+                                            <%= util.getRoleName(userAccount.type) %>
+                                        </span>
+                                    <% } %>
+                                </div>
+                            </div>
+
+                            <!-- organization -->
+                            <% if(userAccount.organization) { %>
+                            <div id="user-organization" class="d-flex flex-column align-items-center justify-content-center mt-3 organization">
+                                <h3>Organisation</h3>
+                                <a href="/admin/organizations/<%= userAccount.organization %>"
+                                    class="action text-decoration-none">
+                                    <span>Voir</span>
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </a>
+                            </div>
+                            <% } %>
+                        </div>
+
+                        <!-- change account status -->
+                        <% if(userAccount.email !== user.email) { %>
+                            <% if(userAccount.account_status==='inactive' ) { %>
+                                <button id="status-change" class="action enable mt-3">Activer</button>
+                            <% } else { %>
+                                <button id="status-change" class="action disable mt-3">Désactiver</button>
+                            <% } %>
+                        <% } %>
+                    </div>
+
+                </div>
+
+                <!-- data -->
+                <div class="profile-data d-flex flex-column align-items-center">
+                    <h3 class="text-center fs-4 fw-bold">Profil</h3>
+                    <form novalidate>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="last-name" class="control-label">Nom</label>
+                                    <input type="text" name="lastName" class="form-control" id="last-name"
+                                        value="<%= userAccount.last_name %>" required disabled>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="first-name" class="control-label">Prénom</label>
+                                    <input type="text" name="firstName" class="form-control" id="first-name"
+                                        value="<%= userAccount.first_name %>" required disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="control-label">Adresse email</label>
+                            <input type="email" name="email" class="form-control" id="email" value="<%= userAccount.email %>"
+                                required disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone" class="control-label">Téléphone</label>
+                            <input type="tel" name="phone" class="form-control" id="phone" value="<%= userAccount.phone %>"
+                                required disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="sign-up-date" class="control-label">Inscription</label>
+                            <input type="text" name="sign-up-date" class="form-control" id="sign-up-date"
+                                value="<%= moment(userAccount.account_creation_date).format('DD/MM/YYYY') %>" required
+                                disabled>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- toasts -->
+    <div id="toast-container" class="toast-container position-fixed"></div>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"></script>
+    <script src="/javascript/dashboard.js"></script>
+    <script src="/javascript/toast.js"></script>
+    <script src="/javascript/status-change.js"></script>
+    <script src="/javascript/view/user-account.js"></script>
+
+</body>
+
+</html>

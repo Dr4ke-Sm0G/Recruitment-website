@@ -1,0 +1,91 @@
+<div id="offers-filters-modal" class="modal fade filter-modal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <!-- modal header -->
+            <div class="modal-header">
+                <h5 class="modal-title">Filtres</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <!-- modal body -->
+            <div class="modal-body">
+
+                <!-- offer_title -->
+                <div class="form-group">
+                    <label for="offerTitle" class="control-label">Titre</label>
+                    <input type="text" name="offerTitle" class="form-control filter" id="offerTitle"
+                        data-filter-name="job_title" data-filter-type="contains">
+                </div>
+
+                <!-- job_place -->
+                <div class="form-group">
+                    <label for="jobPlace" class="control-label">Lieu</label>
+                    <input type="text" name="jobPlace" class="form-control filter" id="jobPlace"
+                        data-filter-name="job_place" data-filter-type="contains">
+                </div>
+
+                <!-- job_status -->
+                <div class="form-group">
+                    <label for="jobStatus" class="control-label">Type de contrat</label>
+                    <select name="jobStatus" id="jobStatus" class="filter" data-filter-name="job_status"
+                        data-filter-type="eq">
+                        <option value="">Tout</option>
+                        <option value="CDD">CDD</option>
+                        <option value="CDI">CDI</option>
+                    </select>
+                </div>
+
+                <!-- telework -->
+                <div class="form-group">
+                    <label for="telework" class="control-label">Télétravail</label>
+                    <select name="telework" id="telework" class="filter" data-filter-name="telework"
+                        data-filter-type="eq">
+                        <option value="">Tout</option>
+                        <option value="1">Oui</option>
+                        <option value="0">Non</option>
+                    </select>
+                </div>
+
+                <!-- offer_creation_date -->
+                <div class="form-group">
+                    <label for="offerCreationDate" class="control-label">Date de création</label>
+                    <div class="d-flex flex-row align-items-center">
+                        <input type="date" name="offerCreationDateFrom" class="form-control filter"
+                            id="offerCreationDate" data-filter-name="creation_date" data-filter-type="ge">
+                        <span class="ms-2 me-2"> au </span>
+                        <input type="date" name="offerCreationDateTo" class="form-control filter" id="offerCreationDate"
+                            data-filter-name="creation_date" data-filter-type="le">
+                    </div>
+                </div>
+
+                <!-- organization_name -->
+                <div class="form-group">
+                    <label for="organizationName" class="control-label">Organisation</label>
+                    <input type="text" name="organizationName" class="form-control filter" id="organizationName"
+                        data-filter-name="organization_name" data-filter-type="contains">
+                </div>
+
+                <!-- organization_type -->
+                <div class="form-group">
+                    <label for="organisationType" class="control-label">Type d'organisation</label>
+                    <select name="organisationType" id="organisationType" class="filter"
+                        data-filter-name="organization_type" data-filter-type="eq">
+                        <option value="">Tout</option>
+                        <option value="association">Association</option>
+                        <option value="sarl">SARL</option>
+                        <option value="eurl">EURL</option>
+                        <option value="sasu">SASU</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <!-- modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="modal-clear-filter-button">Réinitialiser</button>
+                <button type="button" class="modal-filter-button">Filtrer</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,125 @@
+:root {
+  --dark-yellow: #FFD200;
+  --light-yellow: rgb(255, 255, 125);
+  --orange: #E9AB2E;
+  --light-orange: #FBCE75;
+  --white: white;
+  --dark-blue: #28373E;
+  --light-blue: #425863;
+  --dark-grey: #53585c;
+  --light-grey: lightgrey;
+  --light-light-grey: rgb(228, 226, 226);
+  --red: #C82D2D;
+  --light-red: rgb(252, 139, 139);
+  --green: #2ABC39;
+  --light-green: rgb(139, 252, 139);
+  --dark: #171618;
+  --blue: #0090FF;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: Helvetica, Arial, sans-serif;
+  color: var(--dark-grey);
+  background-color: var(--white);
+}
+
+/* navbar */
+
+.navbar {
+  border-bottom: 1px solid var(--light-grey);
+}
+
+.navbar-brand {
+  max-width: 125px;
+}
+
+/* toast */
+
+.toast-container {
+  z-index: 99;
+  bottom: 5px;
+  right: 5px;
+}
+
+.toast-header {
+  background-color: var(--orange);
+}
+
+.toast-header > * {
+  color: var(--dark-blue);
+}
+
+/* dropdown */
+
+.dropdown a:active, .dropdown li:active {
+  background-color: var(--light-grey);
+}
+
+.dropdown a:hover, .dropdown li:hover {
+  cursor: pointer;
+}
+
+/* status */
+
+.status {
+  display: inline-block;
+  border-radius: 50px;
+  padding: 5px 5px;
+  width: 75px;
+  text-align: center;
+}
+
+.status[data-status="active"], .status[data-status="accepted"], .status[data-status="published"] {
+  background-color: var(--light-green);
+}
+
+.status[data-status="inactive"], .status[data-status="refused"], .status[data-status="expired"] {
+  background-color: var(--light-red);
+}
+
+.status[data-status="pending"], .status[data-status="editing"] {
+  background-color: var(--light-yellow);
+}
+
+/* form */
+
+.form-control:valid, .form-control:invalid {
+  background-image: none !important;
+  padding: .375rem .75rem !important;
+}
+
+/* filters */
+
+.filter-modal .modal-header {
+  color: white;
+  background-color: var(--orange);
+}
+
+.filter-modal .modal-body .form-group {
+  margin-bottom: 10px;
+}
+
+.filter-modal .modal-body .form-group label {
+  display: block;
+}
+
+.filter-modal .modal-footer button {
+  background-color: var(--orange);
+  border: none;
+  color: white;
+  width: 100px;
+  height: 30px;
+}
+
+.filter-modal .modal-footer button:hover {
+  opacity: 0.8;
+}
+
+/* error */
+.error {
+  color: var(--red);
+}

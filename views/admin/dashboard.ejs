@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <title>Administrateur - Tableau de bord</title>
+    <link rel="icon" href="/images/logo_left.png">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link rel="stylesheet" href="/stylesheets/dashboard.css">
+    <link rel="stylesheet" href="/stylesheets/card.css">
+    <link rel="stylesheet" href="/stylesheets/table.css">
+</head>
+
+<body>
+
+    <body>
+
+        <!-- sidebar -->
+        <div id="l-sidebar" class="sidebar-active no-transition">
+
+            <!-- header -->
+            <div id="sidebar-header" class="d-flex align-items-center">
+                <a href="/"><img class="navbar-brand" src="/images/logo.png" alt="logo"></a>
+            </div>
+
+            <!-- navigation links -->
+            <ul class="list-unstyled d-flex flex-column justify-content-between">
+
+                <!-- top -->
+                <div class="top">
+                    <li class="nav-link link-active">
+                        <a href="/admin/dashboard" class="text-decoration-none d-block">
+                            <i class="fa-solid fa-gauge text-center"></i>
+                            <span>Tableau de bord</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="/admin/users" class="text-decoration-none d-block">
+                            <i class="fa-solid fa-users text-center"></i>
+                            <span>Comptes</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="/admin/organizations" class="text-decoration-none d-block">
+                            <i class="fa-regular fa-building text-center"></i>
+                            <span>Organisations</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="/admin/recruiter-requests" class="text-decoration-none d-block">
+                            <i class="fa-solid fa-user-plus text-center"></i>
+                            <span>Demandes recruteur</span>
+                        </a>
+                    </li>
+                </div>
+
+                <!-- bottom -->
+                <div class="bottom">
+                    <li class="nav-link">
+                        <a href="/logout" class="text-decoration-none d-block">
+                            <i class="fa-solid fa-right-from-bracket text-center"></i>
+                            <span>Déconnexion</span>
+                        </a>
+                    </li>
+                </div>
+            </ul>
+        </div>
+
+        <!-- top navbar -->
+        <nav id="top-navbar" class="body-padding no-transition">
+            <div id="top-navbar-content" class="d-flex flex-row align-items-center justify-content-between">
+                <i id="toggler" class="fa-solid fa-bars fa-xl clickable"></i>
+                <div class="account d-flex flex-row align-items-center">
+                    <span><%= user.first_name %> <%= user.last_name %></span>
+                    <i class="fa-solid fa-user fa-xl clickable"></i>
+                </div>
+            </div>
+        </nav>
+
+        <!-- content -->
+        <div id="wrapper" class="body-padding no-transition">
+            <div id="content">
+                <h1>Tableau de bord</h1>
+
+                <!-- cards -->
+                <div id="info-cards" class="d-flex flex-row flex-wrap">
+
+                    <!-- card -->
+                    <div class="card d-flex flex-row align-items-center">
+                        <div class="card-icon">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                        <div class="card-value d-flex flex-column">
+                            <span class="card-value-nbr"><%= counts.users %></span>
+                            <span class="card-value-text">Utilisateurs inscrits</span>
+                        </div>
+                    </div>
+
+                    <!-- card -->
+                    <div class="card d-flex flex-row align-items-center">
+                        <div class="card-icon">
+                            <i class="fa-regular fa-building"></i>
+                        </div>
+                        <div class="card-value d-flex flex-column">
+                            <span class="card-value-nbr"><%= counts.organizations %></span>
+                            <span class="card-value-text">Organisations</span>
+                        </div>
+                    </div>
+
+                    <!-- card -->
+                    <div class="card d-flex flex-row align-items-center">
+                        <div class="card-icon">
+                            <i class="fa-solid fa-user-plus"></i>
+                        </div>
+                        <div class="card-value d-flex flex-column">
+                            <span class="card-value-nbr"><%= counts.recruiterRequests %></span>
+                            <span class="card-value-text">Recruteurs à valider</span>
+                        </div>
+                    </div>
+
+                    <!-- card -->
+                    <div class="card d-flex flex-row align-items-center">
+                        <div class="card-icon">
+                            <i class="fa-solid fa-newspaper"></i>
+                        </div>
+                        <div class="card-value d-flex flex-column">
+                            <span class="card-value-nbr"><%= counts.jobOffers %></span>
+                            <span class="card-value-text">Offres d'emploi</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- tables -->
+
+                <!-- users table -->
+                <div id="users-table" class="table-overview">
+
+                    <!-- table header -->
+                    <div class="table-header d-flex flew-row justify-content-between align-items-center">
+                        <h2 class="table-title">Derniers utilisateurs</h2>
+                        <button><a href="/admin/users" class="text-decoration-none">Voir plus</a></button>
+                    </div>
+
+                    <div class="overview-table">
+                        <!-- table -->
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <td>Nom</td>
+                                    <td>Contact</td>
+                                    <td>Statut</td>
+                                    <td>Role</td>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% users.forEach((user) => { %>
+                                <tr scope="row">
+                                    <td class="cell-name d-flex flex-row align-items-center">
+                                        <div><i class="fa-solid fa-user"></i></div>
+                                        <div class="info d-flex flex-column">
+                                            <span><%= user.first_name %> <%= user.last_name %></span>
+                                            <span><%= moment(user.account_creation_date).format('DD/MM/YYYY') %></span>
+                                        </div>
+                                    </td>
+                                    <td class="cell-phone">
+                                        <div class="d-flex flex-column">
+                                            <span><%= user.phone %></span>
+                                            <span><%= user.email %></span>
+                                        </div>
+                                    </td>
+                                    <td class="cell-status">
+                                        <span class="status" data-status="<%= user.account_status %>">
+                                            <%= util.getStatusName(user.account_status) %>
+                                        </span>
+                                    </td>
+                                    <td class="cell-role">
+                                        <span>
+                                            <%= util.getRoleName(user.type) %>
+                                        </span>
+                                    </td>
+                                    <td class="cell-edit">
+                                        <a href="/admin/users/<%= user.email %>"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    </td>
+                                </tr>
+                                <% }) %>
+
+                                <!-- case in which no data is found -->
+                                <% if(users.length === 0) { %>
+                                    <tr><td colspan="10" class="text-center">Aucun utilisateur trouvé.</td></tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- organizations table -->
+                <div id="organizations-table" class="table-overview">
+
+                    <!-- table header -->
+                    <div class="table-header d-flex flew-row justify-content-between align-items-center">
+                        <h2 class="table-title">Dernières organisations</h2>
+                        <button><a href="/admin/organizations" class="text-decoration-none">Voir plus</a></button>
+                    </div>
+
+                    <div class="overview-table">
+                        <!-- table -->
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <td>Nom</td>
+                                    <td>SIREN</td>
+                                    <td>Statut</td>
+                                    <td>Type</td>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% organizations.forEach((organization) => { %>
+                                <tr scope="row">
+                                    <td class="cell-name d-flex flex-row align-items-center">
+                                        <div><i class="fa-solid fa-building"></i></div>
+                                        <div class="info d-flex flex-column">
+                                            <span><%= organization.name %></span>
+                                            <span><%= moment(organization.creation_date).format('DD/MM/YYYY') %></span>
+                                        </div>
+                                    </td>
+                                    <td class="cell-siren">
+                                        <span><%= organization.siren %></span>
+                                    </td>
+                                    <td class="cell-status">
+                                        <span class="status" data-status="<%= organization.status %>">
+                                            <%= util.getStatusName(organization.status) %>
+                                        </span>
+                                    </td>
+                                    <td class="cell-type">
+                                        <span><%= organization.type %></span>
+                                    </td>
+                                    <td class="cell-edit">
+                                        <a href="/admin/organizations/<%= organization.siren %>"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    </td>
+                                </tr>
+                                <% }) %>
+
+                                <!-- case in which no data is found -->
+                                <% if(organizations.length === 0) { %>
+                                    <tr><td colspan="10" class="text-center">Aucune organisation trouvée.</td></tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- recruiter requests table -->
+                <div id="recruiter-requests-table" class="table-overview">
+
+                    <!-- table header -->
+                    <div class="table-header d-flex flew-row justify-content-between align-items-center">
+                        <h2 class="table-title">Demandes recruteur</h2>
+                        <button><a href="/admin/recruiter-requests" class="text-decoration-none">Voir plus</a></button>
+                    </div>
+    
+                    <div class="overview-table">
+                        <!-- table -->
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <td>Nom</td>
+                                    <td>Organisation</td>
+                                    <td>Statut</td>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% recruiterRequests.forEach((request) => { %>
+                                <tr scope="row" data-candidate="<%= request.user_email %>" data-organization="<%= request.organization_siren %>">
+                                    <td class="cell-name d-flex flex-row align-items-center">
+                                        <div><i class="fa-solid fa-user-plus"></i></div>
+                                        <div class="info d-flex flex-column">
+                                            <span><%= request.user_first_name %> <%= request.user_last_name %></span>
+                                            <span><%= moment(request.date).format('DD/MM/YYYY') %></span>
+                                        </div>
+                                    </td>
+                                    <td class="cell-name">
+                                        <div class="d-flex flex-column">
+                                            <span><%= request.organization_name %></span>
+                                            <span><%= request.organization_siren %></span>
+                                        </div>
+                                    </td>
+                                    <td class="cell-status">
+                                        <span class="status" data-status="<%= request.status %>">
+                                        <%= util.getStatusName(request.status) %>
+                                    </span>
+                                </td>
+                                    <td class="cell-edit text-center">
+                                        <% if(request.status === 'pending') { %>
+                                        <i class="fa-solid fa-circle-check action action-accept"></i>
+                                        <i class="fa-solid fa-circle-xmark action action-refuse"></i>
+                                        <% } %>
+                                        <i class="fa-solid fa-trash action action-delete"></i>
+                                    </td>
+                                </tr>
+                                <% }) %>
+
+                                <!-- case in which no data is found -->
+                                <% if(recruiterRequests.length === 0) { %>
+                                    <tr><td colspan="10" class="text-center">Aucune demande recruteur trouvée.</td></tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- toasts -->
+        <div id="toast-container" class="toast-container position-fixed"></div>
+
+        <!-- JavaScript -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"></script>
+        <script src="/javascript/dashboard.js"></script>
+        <script src="/javascript/toast.js"></script>
+        <script src="/javascript/view/recruiter-request.js"></script>
+        <script src="/javascript/view/admin.js"></script>
+    </body>
+
+</html>

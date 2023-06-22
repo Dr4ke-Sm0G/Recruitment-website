@@ -1,0 +1,43 @@
+/* cards */
+
+#info-cards {
+    margin-top: 25px;
+}
+
+.card {
+    padding: 10px;
+    background-color: var(--white);
+    width: 250px;
+    margin-right: 25px;
+}
+
+.card i {
+    color: var(--white);
+    height: 60px;
+    width: 60px;
+    line-height: 60px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: var(--dark-yellow);
+    font-size: 2rem;
+}
+
+.card .card-icon {
+    height: 60px;
+    width: 60px;
+}
+
+.card-value {
+    margin-left: 15px;
+}
+
+.card-value-nbr {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.card-value-text {
+    font-size: 0.8rem;
+    font-weight:lighter;
+    overflow: hidden;
+}

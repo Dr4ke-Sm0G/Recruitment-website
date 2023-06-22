@@ -1,0 +1,66 @@
+@import url('/stylesheets/style.css');
+
+/* Form */
+#content {
+    margin-bottom: 5px;
+    height: calc(100vh - 63px);
+}
+
+/* Center vertically */
+#form-view {
+    margin-top: 30px;
+    height: calc(100vh - 92px);
+}
+
+#sign-up-img {
+    max-width: 650px;
+}
+
+#form-submit {
+    background-color: var(--dark-yellow);
+    color: var(--white);
+    border: none;
+    border-radius: 5px;
+    font-size: medium;
+    font-weight: bold;
+    height: 40px;
+    width: 150px;
+}
+
+.control-label {
+    color: var(--dark);
+    font-weight: bold;
+}
+
+.control-label:after {
+    content:"*";
+    color: var(--red);
+    font-weight: normal;
+}
+
+form > * {
+    padding-top: 15px;
+}
+
+.error {
+    margin-left: 25px;
+}
+
+/* Sign-up checked */
+#form-checked img {
+    max-width: 150px;
+}
+
+#form-checked .text {
+    margin-top: 15px;
+    text-align: center;
+}
+
+#form-checked .text p {
+    margin: 0;
+}
+
+#form-checked .text a {
+    color: var(--dark-yellow);
+    font-weight: bold;
+}

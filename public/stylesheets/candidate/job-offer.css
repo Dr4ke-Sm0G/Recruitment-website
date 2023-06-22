@@ -1,0 +1,86 @@
+/* content */
+.wrapper {
+    row-gap: 30px;
+}
+
+.wrapper-content {
+    width: 100%;
+}
+
+/* offer content */
+.offer-info {
+    height: 100%;
+    width: 100%;
+    padding: 20px;
+    border: 1px solid var(--light-grey)
+}
+
+/* attachements */
+.attachements>* {
+    margin-top: 15px;
+}
+
+.form-group label {
+    display: block;
+}
+
+.attachements button, form input[type="submit"] {
+    color: white;
+    background-color: var(--orange);
+    border: none;
+    width: 125px;
+    height: 30px;
+    transition: 0.5s ease;
+}
+
+.attachements button:hover {
+    opacity: 0.8;
+}
+
+.attachements-table,
+.attachements-table tr,
+.attachements-table th {
+    border-color: var(--dark-grey) !important;
+}
+
+/* Delete attachement */ 
+.attachements-table .action-delete {
+    color: var(--red);
+    text-align: center;
+}
+
+.attachements-table .action-delete i {
+    cursor: pointer;
+}
+
+.attachements-table .action-delete i:hover {
+    opacity: 0.8;
+}
+
+/* responsivity */
+@media (max-width: 768px) {
+    .banner, .wrapper {
+        padding: 50px 10px;
+    }
+}
+
+@media (min-width: 768px) {
+    .banner, .wrapper {
+        padding: 50px 20px;
+    }
+
+    .offer-info {
+        max-width: 250px;
+    }
+
+    .wrapper-content {
+        flex: 1 1 calc(100% - 250px);
+        padding: 0 50px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .banner, .wrapper {
+        padding: 50px;
+    }
+}

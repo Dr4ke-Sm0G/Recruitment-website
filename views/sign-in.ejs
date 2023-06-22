@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <title>Connexion</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/sign-in.css">
+</head>
+
+<body>
+    <main class="content container d-flex flex-column justify-content-center align-items-center">
+        <div class="wrapper d-flex flex-column align-items-center justify-content-center">
+
+            <!-- logo -->
+            <img src="/images/logo.png" class="logo img-fluid" alt="logo">
+
+            <!-- form -->
+            <form action="/sign-in" method="POST" novalidate>
+
+                <!-- email -->
+                <div class="form-group mt-4">
+                    <label for="email" class="control-label">Email</label>
+                    <input type="email" name="email" class="form-control" id="email" placeholder="Email" required>
+                    <div class="invalid-feedback">Entrez une adresse email valide</div>
+                </div>
+
+                <!-- password -->
+                <div class="form-group mt-4">
+                    <label for="password" class="control-label">Mot de passe</label>
+                    <div class="password-container">
+                        <input type="password" name="password" class="form-control password" id="password" placeholder="Mot de passe" required>
+                        <span class="toggle-password">Afficher</span>
+                        <div class="invalid-feedback" for="password">Entrez un mot de passe valide</div>
+                    </div>
+                </div>
+
+                <!-- submit -->
+                <div class="form-group d-flex justify-content-center mt-4 d-flex flex-column align-items-center justify-content-center">
+                    <input type="submit" name="submit" value="S'identifier" id="form-submit">
+                    <% if(error !== null) { %>
+                    <span class="submit-error error mt-2"><%= error.message %></span>
+                    <% } %>
+                </div>
+            </form>
+
+            <!-- sign-up -->
+            <a href="/sign-up" class="sign-up d-block text-decoration-none">Nouveau ? S'inscrire</a>
+        </div>
+        
+    </main>
+
+    <!-- JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"></script>
+    <script src="/javascript/form-validation.js"></script>
+</body>
+
+</html>

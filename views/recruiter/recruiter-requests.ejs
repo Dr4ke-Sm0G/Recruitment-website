@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        rel="stylesheet">
+    <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link rel="stylesheet" href="/stylesheets/dashboard.css">
+    <link rel="stylesheet" href="/stylesheets/table.css">
+    <title>Demandes recruteur</title>
+    <link rel="icon" href="/images/logo_left.png">
+</head>
+
+<body>
+
+    <!-- sidebar -->
+    <div id="l-sidebar" class="sidebar-active no-transition">
+
+        <!-- header -->
+        <div id="sidebar-header" class="d-flex align-items-center">
+            <a href="/"><img class="navbar-brand" src="/images/logo.png" alt="logo"></a>
+        </div>
+
+        <!-- navigation links -->
+        <ul class="list-unstyled d-flex flex-column justify-content-between">
+
+            <!-- top -->
+            <div class="top">
+                <li class="nav-link">
+                    <a href="/recruiter/dashboard" class="text-decoration-none d-block">
+                        <i class="fa-solid fa-gauge text-center"></i>
+                        <span>Tableau de bord</span>
+                    </a>
+                </li>
+                <li class="nav-link">
+                    <a href="/recruiter/offers" class="text-decoration-none d-block">
+                        <i class="fa-solid fa-folder-open text-center"></i>
+                        <span>Offres d'emploi</span>
+                    </a>
+                </li>
+                <li class="nav-link">
+                    <a href="/recruiter/applications" class="text-decoration-none d-block">
+                        <i class="fa-solid fa-clipboard-user text-center"></i>
+                        <span>Candidatures</span>
+                    </a>
+                </li>
+                <li class="nav-link link-active">
+                    <a href="/recruiter/recruiter-requests" class="text-decoration-none d-block">
+                        <i class="fa-solid fa-user-plus text-center"></i>
+                        <span>Demandes recruteur</span>
+                    </a>
+                </li>
+                <li class="nav-link">
+                    <a href="/recruiter/my-organization" class="text-decoration-none d-block">
+                        <i class="fa-solid fa-building text-center"></i>
+                        <span>Mon organisation</span>
+                    </a>
+                </li>
+            </div>
+
+            <!-- bottom -->
+            <div class="bottom">
+                <li class="nav-link">
+                    <a href="/logout" class="text-decoration-none d-block">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <span>Déconnexion</span>
+                    </a>
+                </li>
+            </div>
+        </ul>
+    </div>
+
+    <!-- top navbar -->
+    <nav id="top-navbar" class="body-padding no-transition">
+        <div id="top-navbar-content" class="d-flex flex-row align-items-center justify-content-between">
+            <i id="toggler" class="fa-solid fa-bars fa-xl clickable"></i>
+            <div class="account d-flex flex-row align-items-center">
+                <span><%= user.first_name %> <%= user.last_name %></span>
+                <i class="fa-solid fa-user fa-xl clickable"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- content -->
+    <div id="wrapper" class="body-padding no-transition">
+        <div id="content">
+            <h1>Liste des demandes recruteur</h1>
+
+            <!-- tables -->
+
+            <!-- recruiter requests table -->
+            <div id="recruiter-requests-table" class="table-overview">
+
+                <!-- table header -->
+                <div class="table-header d-flex flew-row justify-content-between align-items-center">
+                    <h2 class="table-title">Demandes recruteur</h2>
+                    <div>
+                        <button class="filter-button" data-bs-toggle="modal" data-bs-target="#recruiter-requests-filters-modal">Filtrer</button>
+                    </div>
+                </div>
+
+                <div class="overview-table">
+                    <!-- table -->
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <td>Nom</td>
+                                <td>Contact</td>
+                                <td class="text-center">Statut</td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% recruiterRequests.forEach((request) => { %>
+                            <tr scope="row" data-candidate="<%= request.user_email %>" data-organization="<%= request.organization_siren %>">
+                                <td class="cell-name d-flex flex-row align-items-center">
+                                    <div><i class="fa-solid fa-user-plus"></i></div>
+                                    <div class="info d-flex flex-column">
+                                        <span><%= request.user_first_name %> <%= request.user_last_name %></span>
+                                        <span><%= moment(request.date).format('DD/MM/YYYY') %></span>
+                                    </div>
+                                </td>
+                                <td class="cell-name">
+                                    <div class="d-flex flex-column">
+                                        <span><%= request.user_email %></span>
+                                        <span><%= request.user_phone %></span>
+                                    </div>
+                                </td>
+                                <td class="cell-status text-center">
+                                    <span class="status" data-status="<%= request.status %>">
+                                    <%= util.getStatusName(request.status) %>
+                                    </span>
+                                </td>
+                                <td class="cell-edit text-center">
+                                    <% if(request.status === 'pending') { %>
+                                    <i class="fa-solid fa-circle-check action action-accept"></i>
+                                    <i class="fa-solid fa-circle-xmark action action-refuse"></i>
+                                    <% } %>
+                                    <i class="fa-solid fa-trash action action-delete"></i>
+                                </td>
+                            </tr>
+                            <% }) %>
+
+                            <!-- case in which no data is found -->
+                            <% if(recruiterRequests.length === 0) { %>
+                                <tr><td colspan="10" class="text-center">Aucune demande recruteur trouvée.</td></tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- pagination -->
+            <% if(pagination !== null) { %>
+                <div class="pagination-container d-flex align-items-center justify-content-center">
+                    <nav aria-label="pagination">
+    
+                        <ul class="pagination">
+                            <!-- previous -->
+                            <li class="page-item <%= pagination.previous === undefined ? 'disabled' : '' %>">
+                                <a class="page-link previous" href="<%= pagination.previousURL %>">
+                                    <i class="fa-solid fa-angle-left"></i>
+                                </a>
+                            </li>
+    
+                            <!-- page numbers -->
+                            <% pagination.pagesURL.forEach((page) => { %>
+                            <li class="page-item">
+                                <a class="page-link <%= page.number == pagination.current ? 'page-current' : '' %>" href="<%= page.url %>">
+                                    <%= page.number %>
+                                </a>
+                            </li>
+                            <% }) %>
+    
+                            <!-- next -->
+                            <li class="page-item <%= pagination.next === undefined ? 'disabled' : '' %>">
+                                <a class="page-link next" href="<%= pagination.nextURL %>">
+                                    <i class="fa-solid fa-angle-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            <% } %>
+        </div>
+    </div>
+
+    <!-- toasts -->
+    <div id="toast-container" class="toast-container position-fixed"></div>
+
+    <!-- filters -->
+    <div id="recruiter-requests-filters-modal" class="modal fade filter-modal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+
+            <!-- modal header -->
+            <div class="modal-header">
+              <h5 class="modal-title">Filtres</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <!-- modal body -->
+            <div class="modal-body">
+
+                <!-- last_name -->
+                <div class="form-group">
+                    <label for="lastName" class="control-label">Nom</label>
+                    <input type="text" name="lastName" class="form-control filter" id="lastName" data-filter-name="user_last_name" data-filter-type="contains">
+                </div>
+
+                <!-- creation_date -->
+                <div class="form-group">
+                    <label for="creationDate" class="control-label">Date de création</label>
+                    <div class="d-flex flex-row align-items-center">
+                        <input type="date" name="creationDateFrom" class="form-control filter" id="creationDate" data-filter-name="date" data-filter-type="ge">
+                        <span class="ms-2 me-2"> au </span>
+                        <input type="date" name="creationDateTo" class="form-control filter" id="creationDate" data-filter-name="date" data-filter-type="le">
+                    </div>
+                </div>
+
+                <!-- status -->
+                <div class="form-group">
+                    <label for="status" class="control-label">Statut</label>
+                    <select name="status" id="status" class="filter" data-filter-name="status" data-filter-type="eq">
+                        <option value="">Tout</option>
+                        <option value="accepted"><%= util.getStatusName('accepted') %></option>
+                        <option value="refused"><%= util.getStatusName('refused') %></option>
+                        <option value="pending"><%= util.getStatusName('pending') %></option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="modal-clear-filter-button">Réinitialiser</button>
+                <button type="button" class="modal-filter-button">Filtrer</button>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"></script>
+    <script src="/javascript/dashboard.js"></script>
+    <script src="/javascript/toast.js"></script>
+    <script src="/javascript/filters.js"></script>
+    <script src="/javascript/view/recruiter-request.js"></script>
+    <script src="/javascript/view/recruiter.js"></script>
+</body>
+
+</html>

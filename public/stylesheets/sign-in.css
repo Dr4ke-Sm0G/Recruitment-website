@@ -1,0 +1,105 @@
+@import url('/stylesheets/style.css');
+
+body {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.wrapper {
+  width: 70%;
+  max-width: 500px;
+}
+
+.wrapper .logo {
+  max-width: 80%;
+  margin-left: -25px;
+}
+
+/* form */
+
+form {
+  width: 100%;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+form label {
+  color: #171618;
+  font-weight: 570;
+  margin-bottom: 2px;
+}
+
+form input[type='submit'] {
+  padding: 8px;
+  width: 90%;
+  border: none;
+  border-radius: 50px;
+  color: var(--dark);
+  font-weight: bold;
+  background-color: var(--dark-yellow);
+  max-width: 400px;
+}
+
+form input[type='submit']:hover {
+  opacity: 0.9;
+}
+
+.control-label:after {
+  content:"*";
+  color: var(--red);
+}
+
+.forgotten-password a {
+  color: gray;
+  font-weight: bold;
+}
+
+.form-control:valid, .form-control:invalid {
+  background-image: none !important;
+}
+
+#password {
+  padding-right: 75px;
+}
+
+.toggle-password {
+  z-index: 99;
+  position: absolute;
+  top: 20px;
+  right: 10px;
+  transform: translateY(-50%);
+  color: var(--blue);
+  font-weight: bold;
+  text-decoration: solid; 
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggle-password:hover {
+  text-decoration: underline;
+}
+
+.password-container {
+  position: relative;
+}
+
+/* sign-up */
+
+.sign-up {
+  width: 100%;
+  max-width: 350px;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 50px;
+  background-color: white;
+  color: var(--dark);
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 570;
+  line-height: normal;
+}
+
+.sign-up:hover {
+  opacity: 0.9;
+}

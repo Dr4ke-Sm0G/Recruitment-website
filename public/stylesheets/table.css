@@ -1,0 +1,175 @@
+/* table */
+
+.table-overview {
+    width: 96%;
+    margin-top: 30px;
+}
+
+.table-header h2 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--dark-blue);
+}
+
+.table-header button {
+    color: white;
+    font-size: 0.8rem;
+    font-weight: bold;
+    background-color: var(--dark-yellow);
+    border: none;
+    border-radius: 15px;
+    width: 80px;
+    height: 30px;
+}
+
+.table-header a {
+    color: white;
+}
+
+.overview-table {
+    overflow: auto;
+}
+
+.table {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    vertical-align: middle;
+    width: 100%;
+}
+
+.table>:not(caption)>*>* {
+    border-bottom-width: 0px;
+}
+
+thead {
+    background-color: rgb(243, 243, 243);
+    padding: 5px;
+    border-bottom: 1px solid lightgray;
+}
+
+thead tr td {
+    color: var(--dark-blue);
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+tbody tr {
+    background-color: white;
+    border-bottom: 1px solid lightgray;
+    padding: 5px;
+}
+
+tbody span {
+    font-size: 0.8rem;
+}
+
+tbody .info {
+    margin-left: 10px;
+}
+
+tbody .cell-name i {
+    height: 35px;
+    width: 35px;
+    line-height: 35px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: var(--dark-yellow);
+    color: white;
+}
+
+tbody .cell-name .info span:nth-child(2n+1) {
+    font-weight: bold;
+}
+
+tbody .cell-name .info span:nth-child(2n) {
+    color: grey;
+}
+
+.cell-edit a {
+    color: var(--dark-blue);
+}
+
+.cell-edit {
+    width: 75px;
+}
+
+/* actions */
+
+.action {
+    cursor: pointer;
+}
+
+.action:hover {
+    opacity: 0.8;
+}
+
+.action-accept {
+    color: var(--green);
+}
+
+.action-refuse {
+    color: var(--red);
+}
+
+.action-delete {
+    color: var(--red);
+}
+
+.action-show {
+    color: var(--orange);
+}
+
+/* pagination */
+
+.pagination-container {
+    width: 96%;
+}
+
+.page-link {
+    border-radius: 50% !important;
+    height: 35px;
+    width: 35px;
+    padding: 0.375rem;
+    margin: 5px;
+    font-weight: bold;
+    vertical-align: middle;
+    text-align: center;
+    color: var(--dark-grey);
+}
+
+.page-link.next, .page-link.previous {
+    background-color: var(--orange) !important;
+    color: white;
+} 
+
+.page-link.page-current {
+    background-color: var(--light-orange) !important;
+}
+
+/* filters */
+
+.filter-modal .modal-header {
+    color: white;
+    background-color: var(--orange);
+}
+
+.filter-modal .modal-body .form-group {
+    margin-bottom: 10px;
+}
+
+.filter-modal .modal-body .form-group label {
+    display: block;
+}
+
+.filter-modal .modal-footer button {
+    background-color: var(--orange);
+    border: none;
+    color: white;
+    width: 100px;
+    height: 30px;
+}
+
+.filter-modal .modal-footer button:hover {
+    opacity: 0.8;
+}
