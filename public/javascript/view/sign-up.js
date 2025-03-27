@@ -18,11 +18,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Sending form data.
         const formData = new FormData(signUpForm);
-        const urlSearchParams = new URLSearchParams(formData);
 
-        const headers = {'Content-Type': 'application/x-www-form-urlencoded'};
-
-        fetch(signUpForm.action, { method: signUpForm.method, body: urlSearchParams.toString(), headers: headers }).then(response => {
+        fetch(signUpForm.action, { method: signUpForm.method, body: formData }).then(response => {
 
             if (response.ok) {
 
@@ -41,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if(data == null) return;
 
-            const error = document.querySelector('.submit-error');
+            const error = document.getElementById('submit-error');
 
             // Displaying error message.
             error.innerHTML = data.message;

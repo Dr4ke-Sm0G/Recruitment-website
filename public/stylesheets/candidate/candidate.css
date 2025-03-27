@@ -1,19 +1,6 @@
 @import url('/stylesheets/style.css');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
 
-/* suppression du background lors d'un clic sur le menu dropdown */
-.navbar-nav .dropdown a:focus, .navbar-nav .dropdown a:hover .navbar-nav .dropdown a:active {
-    background-color: white;
-}
-
-.nav-item a {
-    position: relative;
-}
-
-.nav-item a.active {
-    color: var(--dark-yellow);
-}
-
 .navbar-brand img {
     height: 40px;
 }
@@ -25,24 +12,16 @@
     color: rgba(0, 0, 0, 0.815);
     text-decoration: none;
     transition: all 0.4s ease 0s;
-    padding: 0px 15px;
+    padding: 15px;
 }
 
 .navbar-nav .link:hover {
-    color: var(--dark-yellow);
+    color:var(--dark-yellow);
 }
 
 #content {
     margin-top: 67px;
     min-height: calc(100vh - 67px);
-}
-
-.wrapper {
-    padding: 25px;
-}
-
-.background-light {
-    background: #f3f5f7;
 }
 
 /* pagination */
@@ -86,49 +65,4 @@
 
 .filter-button:hover {
     opacity: 0.8;
-}
-
-/* buttons banner */
-.buttonWrapper {
-    background-color: var(--dark-yellow);
-    height: 50px;
-    height: fit-content;
-}
-
-.buttonWrapper button {
-    border: none;
-    padding: 10px 20px;
-    background-color: var(--dark-yellow);
-    color: #232c3d;
-    font-size: 1.2rem;
-    height: fit-content;
-    cursor: pointer;
-    transition: 0.5s;
-}
-
-.buttonWrapper button:hover {
-    background-color: white;
-}
-
-.buttonWrapper button.active {
-    background-color: white;
-}
-
-/* banner */
-.banner {
-    background-color: #3C486B;
-    height: fit-content;
-    min-height: 300px;
-    color: white;
-}
-
-.banner-item {
-    border-radius: 5px;
-    background-color: var(--orange);
-    padding: 3px 10px;
-    margin: 5px;
-}
-
-.banner-item i {
-    margin-right: 5px;
 }

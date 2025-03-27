@@ -1,0 +1,135 @@
+@import url('/stylesheets/style.css');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
+.navbar-brand img {
+    height: 40px;
+}
+#content {
+    padding: 25px;
+    background-color: var(--light-light-grey);
+    height: 100%;
+}
+.navbar-nav .link {
+    font-family: "Montserrat", sans-serif !important;
+    font-weight: 600;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.815);
+    text-decoration: none;
+    transition: all 0.4s ease 0s;
+    padding: 15px;
+}
+
+
+.navbar-nav .link:hover {
+    color:var(--dark-yellow);
+}
+
+
+body {
+    min-height: 100vh;
+    font-family: 'Poppins' !important;
+    background-color: var(--light-light-grey);
+}
+
+/*table */ 
+.table-overview {
+    width: 96%;
+    margin-top: 100px;
+}
+.table-header button {
+    color: white;
+    font-size: 0.8rem;
+    font-weight: bold;
+    background-color: var(--dark-yellow);
+    border: none;
+    border-radius: 15px;
+    width: 80px;
+    height: 30px;
+}
+.table-header h2 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--dark-blue);
+}
+
+.table-header button {
+    color: white;
+    font-size: 0.8rem;
+    font-weight: bold;
+    background-color: var(--dark-yellow);
+    border: none;
+    border-radius: 15px;
+    width: 80px;
+    height: 30px;
+}
+
+.table-header a {
+    color: white;
+}
+
+.overview-table {
+    overflow: auto;
+}
+
+.table {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    vertical-align: middle;
+    width: 100%;
+}
+
+.table>:not(caption)>*>* {
+    border-bottom-width: 0px;
+}
+
+thead {
+    background-color: rgb(243, 243, 243);
+    padding: 5px;
+    border-bottom: 1px solid lightgray;
+}
+
+thead tr td {
+    color: var(--dark-blue);
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+tbody tr {
+    background-color: white;
+    border-bottom: 1px solid lightgray;
+    padding: 5px;
+}
+
+tbody span {
+    font-size: 0.8rem;
+}
+
+tbody .info {
+    margin-left: 10px;
+}
+
+tbody .cell-name i {
+    height: 35px;
+    width: 35px;
+    line-height: 35px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: var(--dark-yellow);
+    color: white;
+}
+
+tbody .cell-name .info span:nth-child(2n+1) {
+    font-weight: bold;
+}
+
+tbody .cell-name .info span:nth-child(2n) {
+    color: grey;
+}
+
+.cell-edit a {
+    color: var(--dark-blue);
+}
+
+.cell-edit {
+    width: 250px;
+}

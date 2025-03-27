@@ -1,0 +1,13 @@
+# Ne pas versionner les dépendances
+node_modules/
+
+# Env vars
+.env
+
+# Logs
+logs
+*.log
+
+# OS junk
+.DS_Store
+Thumbs.db

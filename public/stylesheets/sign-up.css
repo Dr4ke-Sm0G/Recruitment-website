@@ -3,7 +3,6 @@
 /* Form */
 #content {
     margin-bottom: 5px;
-    height: calc(100vh - 63px);
 }
 
 /* Center vertically */
@@ -43,6 +42,7 @@ form > * {
 }
 
 .error {
+    color: var(--red);
     margin-left: 25px;
 }
 

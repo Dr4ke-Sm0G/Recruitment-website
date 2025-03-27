@@ -146,30 +146,3 @@ tbody .cell-name .info span:nth-child(2n) {
 .page-link.page-current {
     background-color: var(--light-orange) !important;
 }
-
-/* filters */
-
-.filter-modal .modal-header {
-    color: white;
-    background-color: var(--orange);
-}
-
-.filter-modal .modal-body .form-group {
-    margin-bottom: 10px;
-}
-
-.filter-modal .modal-body .form-group label {
-    display: block;
-}
-
-.filter-modal .modal-footer button {
-    background-color: var(--orange);
-    border: none;
-    color: white;
-    width: 100px;
-    height: 30px;
-}
-
-.filter-modal .modal-footer button:hover {
-    opacity: 0.8;
-}

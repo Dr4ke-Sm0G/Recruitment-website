@@ -103,3 +103,8 @@ form input[type='submit']:hover {
 .sign-up:hover {
   opacity: 0.9;
 }
+
+/* error */
+.error {
+  color: var(--red);
+}

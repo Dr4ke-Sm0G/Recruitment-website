@@ -1,10 +1,51 @@
+ /* offer banner */
+.banner {
+    background-color: #3C486B;
+    height: fit-content;
+    min-height: 300px;
+    color: white;
+}
+
+.banner-item {
+    border-radius: 5px;
+    background-color: var(--orange);
+    padding: 3px 10px;
+    margin: 5px;
+}
+
+.banner-item i {
+    margin-right: 5px;
+}
+
+/* buttons banner */
+
+.buttonWrapper {
+    background-color: var(--dark-yellow);
+    height: 50px;
+}
+
+.buttonWrapper button {
+    border: none;
+    padding: 10px 20px;
+    background-color: var(--dark-yellow);
+    color: #232c3d;
+    font-size: 1.2rem;
+    height: 100%;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.buttonWrapper button:hover {
+    background-color: white;
+}
+
+.buttonWrapper button.active {
+    background-color: white;
+}
+
 /* content */
 .wrapper {
     row-gap: 30px;
-}
-
-.wrapper-content {
-    width: 100%;
 }
 
 /* offer content */
@@ -24,7 +65,7 @@
     display: block;
 }
 
-.attachements button, form input[type="submit"] {
+.attachements button {
     color: white;
     background-color: var(--orange);
     border: none;
@@ -41,20 +82,6 @@
 .attachements-table tr,
 .attachements-table th {
     border-color: var(--dark-grey) !important;
-}
-
-/* Delete attachement */ 
-.attachements-table .action-delete {
-    color: var(--red);
-    text-align: center;
-}
-
-.attachements-table .action-delete i {
-    cursor: pointer;
-}
-
-.attachements-table .action-delete i:hover {
-    opacity: 0.8;
 }
 
 /* responsivity */

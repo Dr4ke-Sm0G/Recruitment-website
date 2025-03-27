@@ -24,28 +24,25 @@ function initChangeStatusButton(url) {
         const body = JSON.stringify({ status: status });
 
         fetch(url, { method: 'PATCH', headers: headers, body: body })
-            .then(response => response.json().then(data => ({response: response, body: data})))
-            .then(data => {
+        .then(response => response.json())
+        .then(data => {
 
-            if(data.response.ok) {
+            // Modifying button text and appearance.
+            button.classList.toggle('enable');
+            button.classList.toggle('disable');
 
-                // Modifying button text and appearance.
-                button.classList.toggle('enable');
-                button.classList.toggle('disable');
+            const text = button.classList.contains('enable') ? 'Activer' : 'Désactiver';
+            button.firstChild.data = text;
 
-                const text = button.classList.contains('enable') ? 'Activer' : 'Désactiver';
-                button.firstChild.data = text;
-
-                // Upadting status container.
-                updateStatusDisplay(status);
-            }
+            // Upadting status container.
+            updateStatusDisplay(status);
 
             // Showing response toast.
-            showToast(data.body.message);
+            showToast(data.message);
 
         }).catch(error => {
 
-            console.error(error);
+            console.log(error);
 
             // Showing response toast.
             showToast("Une erreur est survenue.");

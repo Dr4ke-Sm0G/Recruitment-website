@@ -146,8 +146,6 @@
     border-radius: 5px;
     text-align: center;
     vertical-align: middle;
-    color: white;
-    font-weight: bold;
 }
 
 .profile-actions .dropdown {
@@ -236,6 +234,10 @@ button.action {
 .profile-data .form-group label {
     font-weight: bold;
     color: var(--dark-blue)
+}
+
+.error {
+    color: var(--red);
 }
 
 .orange-button {
